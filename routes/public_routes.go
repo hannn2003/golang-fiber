@@ -6,8 +6,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func PublicRoutes(a *fiber.App) {
+func PublicRoutes(a *fiber.App, userController *controllers.UserController) {
 	route := a.Group("/api/v1")
-	route.Get("/", controllers.HealthApi)
-	route.Get("/products", controllers.GetProducts)
+
+	route.Get("/users", userController.GetUsers)
+	route.Get("/users/:id", userController.GetUserById)
+	route.Post("/create-user", userController.UserSignUp)
 }
